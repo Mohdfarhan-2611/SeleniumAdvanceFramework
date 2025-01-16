@@ -1,9 +1,11 @@
-package org.example.pages.PageObjectModel;
+package org.example.pages.PageObjectModel.APPVWO;
 
+import org.example.base.CommonToAllPage;
+import org.example.utils.PropertiesReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage_POM {
+public class LoginPage_POM extends CommonToAllPage {
 
     WebDriver driver;
 
@@ -25,9 +27,10 @@ public class LoginPage_POM {
 
     public String loginToVWOInvalidCreds(String user, String pass)
     {
-        driver.findElement(username).sendKeys(user);
-        driver.findElement(password).sendKeys(pass);
-        driver.findElement(signButton).click();
+        driver.get(PropertiesReader.readKey("url"));
+        sendKeys(username, user);
+        sendKeys(password, pass);
+        clickElement(signButton);
 
         try {
             Thread.sleep(3000);}
@@ -42,9 +45,17 @@ public class LoginPage_POM {
 
     public void loginToVWOValidCreds(String user, String pass)
     {
-        driver.findElement(username).sendKeys(user);
-        driver.findElement(password).sendKeys(pass);
-        driver.findElement(signButton).click();
+        driver.get(PropertiesReader.readKey("url"));
+        sendKeys(username, user);
+        sendKeys(password, pass);
+        clickElement(signButton);
+
+        try {
+            Thread.sleep(3000);}
+        catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 
